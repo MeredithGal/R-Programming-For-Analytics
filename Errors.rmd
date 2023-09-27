@@ -1,0 +1,15 @@
+```{r}
+#Example of atomic vector with double type of data
+rank <- c(1,2,3,4,5,6
+#Example of atomic vector with character type of data
+rank2 <- c("First","Second","Third","Fourth","Fifth","Sixth")
+#Example of atomic vector with logical type of data
+rank_logical <- c(TRUE,TRUE,FALSE)
+#Data Frames - two dimensional verson of vectors and lists. Similar Excel Spreadsheet
+spelling_bee <- data.frame(place=c(1,2,3),student=c("John","Sally","Joe"))
+```
+
+```{r}
+
+```
+
