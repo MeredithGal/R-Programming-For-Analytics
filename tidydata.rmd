@@ -1,0 +1,61 @@
+# tidyr - Pivoting
+
+References: 
+* https://tidyr.tidyverse.org/reference/pivot_longer.html 
+* https://tidyr.tidyverse.org/articles/pivot.html
+
+Always need to load the proper library for what functions you plan to use. In this case, tidyverse will be loaded.
+```{r}
+library(tidyverse)
+```
+
+## How to use pivot_longer (replaces gather command in tidyr)
+
+pivot_longer() makes datasets longer by increasing the number of rows and decreasing the number of columns. I don’t believe it makes sense to describe a dataset as being in “long form”.
+
+
+```{r pivot_longer1}
+table4a
+ggplot(table4a,mapping=aes(country,1999)) +
+  geom_point()
+
+pivot_longer(table4a,c('1999','2000'),names_to='year',values_to='cases')
+
+table4a <- table4a %>%
+  pivot_longer(c('1999','2000'),names_to='year',values_to='cases')
+
+ggplot(table4a,mapping=aes(year,cases,color=country)) +
+  geom_point() 
+
+```
+
+```{r pivot_longer2}
+table4b
+
+pivot_longer(table4b,c('1999','2000'),names_to="year",values_to="popluation")
+
+table4b <- pivot_longer(table4b,c('1999','2000'),names_to="year",values_to="popluation")
+
+JoinedTable <- left_join(table4a,table4b)
+JoinedTable$year <- as.integer(JoinedTable$year)
+```
+
+
+## How to pivot_wider (replaces spreading)
+
+pivot_wider() is the opposite of pivot_longer(): it makes a dataset wider by increasing the number of columns and decreasing the number of rows. It’s relatively rare to need pivot_wider() to make tidy data, but it’s often useful for creating summary tables for presentation, or data in a format needed by other tools
+
+```{r pivot_wider}
+table2
+table2 <- pivot_wider(table2,names_from="type",values_from="count")
+```
+
+```{r separating}
+table3
+table3 <- separate(table3,rate,into=c("cases","populatoin"),sep='/',convert=TRUE)
+```
+
+
+
+
+
