@@ -1,0 +1,66 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+# dplyr Basics
+
+dplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+
+* mutate() adds new variables that are functions of existing variables
+* select() picks variables based on their names.
+* filter() picks cases based on their values.
+* summarise() reduces multiple values down to a single summary.
+* arrange() changes the ordering of the rows.
+
+## Loading Packages and Data
+```{r LibraryData}
+library(tidyverse)
+data("starwars")
+help("starwars")
+```
+
+## Filter
+filters information based on a value (remember to use ==)
+
+```{r FilterExample}
+filter(starwars,films=="The Force Awakens")
+ForceAwakens <- filter(starwars,films=="The Force Awakens")
+```
+
+## Arrange
+changes the ordering of the rows
+
+```{r ArrangeExample}
+arrange(ForceAwakens,name)
+ForceAwakens <- arrange(ForceAwakens,name)
+```
+
+## Mutate
+adds new variables that are functions of existing variables
+
+```{r MutateExample}
+Droid <- filter(starwars,species=="Droid")
+
+mutate(Droid,mass_lbs = mass*2.2)
+Droid <- mutate(Droid,mass_lbs = mass*2.2)
+```
+
+# Select
+picks variables based on their names
+
+```{r SelectExample}
+Droid2 <- select(Droid,name,height,mass_lbs,homeworld)
+Droid3 <- select(Droid,name,height,mass_lbs,homeworld,everything())
+```
+
+# Summarize
+reduces multiple values down to a single summary
+
+```{r SummarizeExample}
+summarize(starwars,mass=mean(mass,na.rm=TRUE))
+
+starwars_summary <- group_by(starwars,species)
+summarize(starwars_summary,mass=mean(mass,na.rm=TRUE))
+```
+
